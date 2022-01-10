@@ -84,13 +84,13 @@ public class plugin_ICTmeasures implements Command
 		description = "Quantifies the amount of overlap between the reference annotations and the computed segmentation.")
 	private boolean calcSEG = true;
 
-	@Parameter(label = "DET",
-			description = "Evaluates the ability of an algorithm to detect (without tracking) cells.")
-	private boolean calcDET = true;
-
 	@Parameter(label = "TRA",
 		description = "Evaluates the ability of an algorithm to track cells in time.")
 	private boolean calcTRA = true;
+
+	@Parameter(label = "DET",
+			description = "Evaluates the ability of an algorithm to detect (without tracking) cells.")
+	private boolean calcDET = true;
 
 
 	@Parameter(visibility = ItemVisibility.MESSAGE, persist = false, required = false,
@@ -161,23 +161,6 @@ public class plugin_ICTmeasures implements Command
 		}
 
 		TrackDataCache tradetCache = null;
-		if (calcDET)
-		{
-			try {
-				final DET det = new DET(log);
-				det.doLogReports = optionVerboseLogging;
-				det.noOfDigits = noOfDigits;
-				DET = det.calculate(GTdir, RESdir);
-				tradetCache = det.getCache();
-			}
-			catch (RuntimeException e) {
-				log.error("CTC DET measure problem: "+e.getMessage());
-			}
-			catch (Exception e) {
-				log.error("CTC DET measure error: "+e.getMessage());
-			}
-		}
-
 		if (calcTRA)
 		{
 			try {
@@ -185,13 +168,30 @@ public class plugin_ICTmeasures implements Command
 				tra.doConsistencyCheck = optionConsistency;
 				tra.doLogReports = optionVerboseLogging;
 				tra.noOfDigits = noOfDigits;
-				TRA = tra.calculate(GTdir, RESdir, tradetCache);
+				TRA = tra.calculate(GTdir, RESdir);
+				tradetCache = tra.getCache();
 			}
 			catch (RuntimeException e) {
 				log.error("CTC TRA measure problem: "+e.getMessage());
 			}
 			catch (Exception e) {
 				log.error("CTC TRA measure error: "+e.getMessage());
+			}
+		}
+
+		if (calcDET)
+		{
+			try {
+				final DET det = new DET(log);
+				det.doLogReports = optionVerboseLogging;
+				det.noOfDigits = noOfDigits;
+				DET = det.calculate(GTdir, RESdir, tradetCache);
+			}
+			catch (RuntimeException e) {
+				log.error("CTC DET measure problem: "+e.getMessage());
+			}
+			catch (Exception e) {
+				log.error("CTC DET measure error: "+e.getMessage());
 			}
 		}
 
