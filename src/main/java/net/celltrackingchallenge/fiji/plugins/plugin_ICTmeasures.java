@@ -27,6 +27,7 @@
  */
 package net.celltrackingchallenge.fiji.plugins;
 
+import net.celltrackingchallenge.measures.TrackDataCache;
 import org.scijava.ItemIO;
 import org.scijava.ItemVisibility;
 import org.scijava.command.Command;
@@ -37,8 +38,9 @@ import org.scijava.log.LogService;
 import org.scijava.widget.FileWidget;
 import java.io.File;
 
-import net.celltrackingchallenge.measures.TRA;
 import net.celltrackingchallenge.measures.SEG;
+import net.celltrackingchallenge.measures.DET;
+import net.celltrackingchallenge.measures.TRA;
 
 @Plugin(type = Command.class, menuPath = "Plugins>Cell Tracking Challenge>Technical measures",
         name = "CTC_ICT", headless = true,
@@ -82,6 +84,10 @@ public class plugin_ICTmeasures implements Command
 		description = "Quantifies the amount of overlap between the reference annotations and the computed segmentation.")
 	private boolean calcSEG = true;
 
+	@Parameter(label = "DET",
+			description = "Evaluates the ability of an algorithm to detect (without tracking) cells.")
+	private boolean calcDET = true;
+
 	@Parameter(label = "TRA",
 		description = "Evaluates the ability of an algorithm to track cells in time.")
 	private boolean calcTRA = true;
@@ -124,6 +130,9 @@ public class plugin_ICTmeasures implements Command
 	double SEG = -1;
 
 	@Parameter(type = ItemIO.OUTPUT)
+	double DET = -1;
+
+	@Parameter(type = ItemIO.OUTPUT)
 	double TRA = -1;
 
 
@@ -151,6 +160,24 @@ public class plugin_ICTmeasures implements Command
 			}
 		}
 
+		TrackDataCache tradetCache = null;
+		if (calcDET)
+		{
+			try {
+				final DET det = new DET(log);
+				det.doLogReports = optionVerboseLogging;
+				det.noOfDigits = noOfDigits;
+				DET = det.calculate(GTdir, RESdir);
+				tradetCache = det.getCache();
+			}
+			catch (RuntimeException e) {
+				log.error("CTC DET measure problem: "+e.getMessage());
+			}
+			catch (Exception e) {
+				log.error("CTC DET measure error: "+e.getMessage());
+			}
+		}
+
 		if (calcTRA)
 		{
 			try {
@@ -158,7 +185,7 @@ public class plugin_ICTmeasures implements Command
 				tra.doConsistencyCheck = optionConsistency;
 				tra.doLogReports = optionVerboseLogging;
 				tra.noOfDigits = noOfDigits;
-				TRA = tra.calculate(GTdir, RESdir);
+				TRA = tra.calculate(GTdir, RESdir, tradetCache);
 			}
 			catch (RuntimeException e) {
 				log.error("CTC TRA measure problem: "+e.getMessage());
