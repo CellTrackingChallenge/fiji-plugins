@@ -9,7 +9,7 @@
 
 	<groupId>net.celltrackingchallenge</groupId>
 	<artifactId>CTC-Fiji-plugins</artifactId>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 
 	<organization>
 		<name>The Cell Tracking Challenge</name>
@@ -148,7 +148,7 @@
 		<dependency>
 			<groupId>net.celltrackingchallenge</groupId>
 			<artifactId>CTC-measures</artifactId>
-			<version>0.9.0</version>
+			<version>0.9.1</version>
 		</dependency>
 
 		<dependency>

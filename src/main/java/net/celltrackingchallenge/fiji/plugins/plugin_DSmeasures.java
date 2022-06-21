@@ -43,12 +43,12 @@ import net.celltrackingchallenge.measures.CR;
 import net.celltrackingchallenge.measures.HETI;
 import net.celltrackingchallenge.measures.HETB;
 import net.celltrackingchallenge.measures.RES;
+import net.celltrackingchallenge.measures.SHA;
 import net.celltrackingchallenge.measures.DEN;
 import net.celltrackingchallenge.measures.CHA;
 import net.celltrackingchallenge.measures.OVE;
 import net.celltrackingchallenge.measures.MIT;
 /*
-import net.celltrackingchallenge.measures.SHA;
 import net.celltrackingchallenge.measures.SYN;
 import net.celltrackingchallenge.measures.ENTLEAV;
 */
@@ -128,10 +128,8 @@ public class plugin_DSmeasures implements Command
 		description = "Evaluates the average resolution, measured as the average size of the cells in number of pixels (2D) or voxels (3D).")
 	private boolean calcRes = true;
 
-	/*
 	@Parameter(label = "Sha",
 		description = "Evaluates the average regularity of the cell shape, normalized between 0 (completely irregular) and 1 (perfectly regular).")
-	*/
 	private boolean calcSha = false;
 
 	@Parameter(label = "Den",
@@ -321,7 +319,6 @@ public class plugin_DSmeasures implements Command
 			}
 		}
 
-		/*
 		if (calcSha)
 		{
 			try {
@@ -336,7 +333,6 @@ public class plugin_DSmeasures implements Command
 				log.error("CTC Sha measure error: "+e.getMessage());
 			}
 		}
-		*/
 
 		if (calcDen)
 		{
