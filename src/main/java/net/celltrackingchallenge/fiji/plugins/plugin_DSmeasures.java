@@ -27,11 +27,14 @@
  */
 package net.celltrackingchallenge.fiji.plugins;
 
+import net.imagej.ops.OpService;
 import org.scijava.ItemIO;
 import org.scijava.ItemVisibility;
 import org.scijava.command.Command;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
+import org.scijava.log.LogLevel;
+import org.scijava.log.Logger;
 import org.scijava.log.LogService;
 
 import org.scijava.widget.FileWidget;
@@ -60,10 +63,10 @@ import net.celltrackingchallenge.measures.ENTLEAV;
 				+"http://www.celltrackingchallenge.net/submission-of-results.html")
 public class plugin_DSmeasures implements Command
 {
-	//------------- GUI stuff -------------
-	//
 	@Parameter
-	private LogService log;
+	private LogService logService;
+	@Parameter
+	private OpService opService;
 
 	@Parameter(label = "Path to images folder:",
 		style = FileWidget.DIRECTORY_STYLE,
@@ -95,6 +98,9 @@ public class plugin_DSmeasures implements Command
 			+ "BG/mask???.tif, TRA/man_track???.tif and man_track.txt. "
 			+ "The TRA/man_track???.tif must provide realistic masks of cells (not just blobs representing centres etc.).")
 	private File annPath;
+
+	@Parameter(label = "Verbose log:")
+	boolean doVerboseLogging = false;
 
 	@Parameter(visibility = ItemVisibility.MESSAGE, persist = false, required = false)
 	private final String pathFooterA
@@ -222,6 +228,9 @@ public class plugin_DSmeasures implements Command
 	@Override
 	public void run()
 	{
+		final Logger log = logService.subLogger("DatasetMeasures",
+				doVerboseLogging ? LogLevel.TRACE : LogLevel.INFO);
+
 		//store the resolution information
 		final double[] resolution = new double[3];
 		resolution[0] = xRes;
@@ -238,7 +247,7 @@ public class plugin_DSmeasures implements Command
 		//create an "empty" object and tell it what features we wanna calculate,
 		//the first measure to be calculated will recognize that this object does not fit
 		//and will make a new one that fits and will retain the flags of demanded features
-		ImgQualityDataCache cache = new ImgQualityDataCache(log);
+		ImgQualityDataCache cache = new ImgQualityDataCache(log,opService);
 		if (calcDen) cache.doDensityPrecalculation = true;
 		if (calcSha) cache.doShapePrecalculation = true;
 		cache.noOfDigits = noOfDigits;
@@ -322,7 +331,7 @@ public class plugin_DSmeasures implements Command
 		if (calcSha)
 		{
 			try {
-				final SHA sha = new SHA(log);
+				final SHA sha = new SHA(log,opService);
 				Sha = sha.calculate(IMGdir, resolution, ANNdir, cache);
 				cache = sha.getCache();
 			}
