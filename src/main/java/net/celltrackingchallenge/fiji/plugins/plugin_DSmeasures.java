@@ -47,7 +47,7 @@ import net.celltrackingchallenge.measures.HETI;
 import net.celltrackingchallenge.measures.HETB;
 import net.celltrackingchallenge.measures.RES;
 import net.celltrackingchallenge.measures.SHA;
-import net.celltrackingchallenge.measures.DEN;
+import net.celltrackingchallenge.measures.SPA;
 import net.celltrackingchallenge.measures.CHA;
 import net.celltrackingchallenge.measures.OVE;
 import net.celltrackingchallenge.measures.MIT;
@@ -138,9 +138,9 @@ public class plugin_DSmeasures implements Command
 		description = "Evaluates the average regularity of the cell shape, normalized between 0 (completely irregular) and 1 (perfectly regular).")
 	private boolean calcSha = false;
 
-	@Parameter(label = "Den",
+	@Parameter(label = "Spa",
 		description = "Evaluates the cell density measured as average minimum pixel (2D) or voxel (3D) distance between cells.")
-	private boolean calcDen = true;
+	private boolean calcSpa = true;
 
 	@Parameter(label = "Cha",
 		description = "Evaluates the absolute change of the average intensity of the cells with time.")
@@ -204,7 +204,7 @@ public class plugin_DSmeasures implements Command
 	double Sha = -1;
 
 	@Parameter(type = ItemIO.OUTPUT)
-	double Den = -1;
+	double Spa = -1;
 
 	@Parameter(type = ItemIO.OUTPUT)
 	double Cha = -1;
@@ -248,7 +248,7 @@ public class plugin_DSmeasures implements Command
 		//the first measure to be calculated will recognize that this object does not fit
 		//and will make a new one that fits and will retain the flags of demanded features
 		ImgQualityDataCache cache = new ImgQualityDataCache(log,opService);
-		if (calcDen) cache.doDensityPrecalculation = true;
+		if (calcSpa) cache.doDensityPrecalculation = true;
 		if (calcSha) cache.doShapePrecalculation = true;
 		cache.noOfDigits = noOfDigits;
 
@@ -343,12 +343,12 @@ public class plugin_DSmeasures implements Command
 			}
 		}
 
-		if (calcDen)
+		if (calcSpa)
 		{
 			try {
-				final DEN den = new DEN(log);
-				Den = den.calculate(IMGdir, resolution, ANNdir, cache);
-				cache = den.getCache();
+				final SPA spa = new SPA(log);
+				Spa = spa.calculate(IMGdir, resolution, ANNdir, cache);
+				cache = spa.getCache();
 			}
 			catch (RuntimeException e) {
 				log.error("CTC Den measure problem: "+e.getMessage());

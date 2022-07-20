@@ -148,7 +148,7 @@
 		<dependency>
 			<groupId>net.celltrackingchallenge</groupId>
 			<artifactId>CTC-measures</artifactId>
-			<version>0.9.7</version>
+			<version>1.0.0</version>
 		</dependency>
 
 		<dependency>
