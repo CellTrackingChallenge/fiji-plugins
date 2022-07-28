@@ -6,7 +6,7 @@ In particular, one can find here:
 
 * Technical (developer-oriented) tracking and segmentation measures: TRA, SEG, DET
 * Biological (user-oriented) measures: CT, TF, BC(i), CCA
-* Dataset quality measures: SNR, CR, Hetb, Heti, Res, Sha, Den, Cha, Ove, Mit
+* Dataset quality measures: SNR, CR, Hetb, Heti, Res, Sha, Spa, Cha, Ove, Mit
 * Tracking accuracy evaluation with general [Acyclic Oriented Graphs Measure (AOGM)](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0144959)
 
 The binaries of the technical measures can be downloaded from the [official challenge website](http://www.celltrackingchallenge.net).
@@ -27,6 +27,7 @@ Enabling update site in a new or existing Fiji installation:
 1. Click 'Manage update sites' in the opened 'ImageJ Updater' dialog
 1. Mark the 'CellTrackingChallenge' checkbox
 1. Click 'Close' to close the dialog
+1. Click 'Apply changes' in the updater dialog window
 
 
 Notes
