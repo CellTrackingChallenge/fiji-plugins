@@ -9,7 +9,7 @@
 
 	<groupId>net.celltrackingchallenge</groupId>
 	<artifactId>CTC-Fiji-plugins</artifactId>
-	<version>0.1.3</version>
+	<version>0.1.4</version>
 
 	<organization>
 		<name>The Cell Tracking Challenge</name>
@@ -18,7 +18,7 @@
 
 	<name>Cell Tracking Challenge -- Fiji plugins with the CTC measures</name>
 	<description>Front-end Fiji plugins that makes accessible the CTC measures for quantitative evaluation of biomedical tracking in general.</description>
-	<url>https://github.com/CellTrackingChallenge/CTC-Fiji-plugins</url>
+	<url>https://github.com/CellTrackingChallenge/fiji-plugins</url>
 	<inceptionYear>2017</inceptionYear>
 
 	<licenses>
@@ -63,15 +63,14 @@
 
 	<scm>
 		<tag>HEAD</tag>
-		<url>https://github.com/CellTrackingChallenge/CTC-Fiji-plugins</url>
+		<url>https://github.com/CellTrackingChallenge/fiji-plugins</url>
 	</scm>
 	<issueManagement>
 		<system>GitHub Issues</system>
-		<url>http://github.com/CellTrackingChallenge/CTC-Fiji-plugins/issues</url>
+		<url>http://github.com/CellTrackingChallenge/fiji-plugins/issues</url>
 	</issueManagement>
 	<ciManagement>
-		<system>Travis CI</system>
-		<url>https://travis-ci.com/CellTrackingChallenge/CTC-Fiji-plugins</url>
+		<system>none</system>
 	</ciManagement>
 
 	<build>
