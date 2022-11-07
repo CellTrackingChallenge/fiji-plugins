@@ -48,7 +48,7 @@ import net.celltrackingchallenge.measures.TrackDataCache;
 		  description = "Checks the tracking data for consistency.\n"
 				+"It is the same consistency as is used in the AOGM tracking measure.\n"
 				+"The plugin assumes certain data format, please see\n"
-				+"http://www.celltrackingchallenge.net/submission-of-results.html")
+				+"http://celltrackingchallenge.net/submission-of-results/")
 public class plugin_AOGMconsistency implements Command
 {
 	//------------- GUI stuff -------------
@@ -78,7 +78,7 @@ public class plugin_AOGMconsistency implements Command
 		= "Note that folder has to comply with certain data format, please see";
 	@Parameter(visibility = ItemVisibility.MESSAGE, persist = false, required = false)
 	private final String pathFooterB
-		= "http://www.celltrackingchallenge.net/submission-of-results.html";
+		= "http://celltrackingchallenge.net/submission-of-results/";
 
 
 	@Parameter(type = ItemIO.OUTPUT)

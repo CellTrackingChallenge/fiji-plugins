@@ -45,7 +45,7 @@ import net.celltrackingchallenge.measures.util.NumberSequenceHandler;
         name = "CTC_DET", headless = true,
 		  description = "Calculates segmentation performance measure from the CTC paper.\n"
 				+"The plugin assumes certain data format, please see\n"
-				+"http://www.celltrackingchallenge.net/submission-of-results.html")
+				+"http://celltrackingchallenge.net/submission-of-results/")
 public class plugin_DETmeasure implements Command
 {
 	//------------- GUI stuff -------------
@@ -72,7 +72,7 @@ public class plugin_DETmeasure implements Command
 		= "Note that folders has to comply with certain data format, please see";
 	@Parameter(visibility = ItemVisibility.MESSAGE, persist = false, required = false)
 	private final String pathFooterB
-		= "http://www.celltrackingchallenge.net/submission-of-results.html";
+		= "http://celltrackingchallenge.net/submission-of-results/";
 
 
 	@Parameter(visibility = ItemVisibility.MESSAGE, persist = false, required = false,

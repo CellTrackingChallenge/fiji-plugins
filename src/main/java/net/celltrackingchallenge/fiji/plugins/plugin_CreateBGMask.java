@@ -46,7 +46,7 @@ import net.celltrackingchallenge.measures.util.NumberSequenceHandler;
         name = "CTC_BG", headless = true,
         description = "Creates mandatory aux images to calculate dataset quality measures from the CTC paper.\n"
 				+"The plugin assumes certain data format, please see\n"
-				+"http://www.celltrackingchallenge.net/submission-of-results.html")
+				+"http://celltrackingchallenge.net/submission-of-results/")
 public class plugin_CreateBGMask implements Command
 {
 	@Parameter
@@ -80,7 +80,7 @@ public class plugin_CreateBGMask implements Command
 			= "Note that folders has to comply with certain data format, please see";
 	@Parameter(visibility = ItemVisibility.MESSAGE, persist = false, required = false)
 	private final String pathFooterB
-			= "http://www.celltrackingchallenge.net/submission-of-results.html";
+			= "http://celltrackingchallenge.net/submission-of-results/";
 
 	@Parameter(label = "Post processing erosion, pixel radius:", min = "0",
 		description = "Set to 0 to disable the post-processing.")

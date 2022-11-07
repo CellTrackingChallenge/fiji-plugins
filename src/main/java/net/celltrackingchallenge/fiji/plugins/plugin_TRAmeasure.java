@@ -43,7 +43,7 @@ import net.celltrackingchallenge.measures.TRA;
         name = "CTC_TRA", headless = true,
 		  description = "Calculates segmentation performance measure from the CTC paper.\n"
 				+"The plugin assumes certain data format, please see\n"
-				+"http://www.celltrackingchallenge.net/submission-of-results.html")
+				+"http://celltrackingchallenge.net/submission-of-results/")
 public class plugin_TRAmeasure implements Command
 {
 	//------------- GUI stuff -------------
@@ -70,7 +70,7 @@ public class plugin_TRAmeasure implements Command
 		= "Note that folders has to comply with certain data format, please see";
 	@Parameter(visibility = ItemVisibility.MESSAGE, persist = false, required = false)
 	private final String pathFooterB
-		= "http://www.celltrackingchallenge.net/submission-of-results.html";
+		= "http://celltrackingchallenge.net/submission-of-results/";
 
 
 	@Parameter(visibility = ItemVisibility.MESSAGE, persist = false, required = false,
