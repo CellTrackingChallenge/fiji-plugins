@@ -102,6 +102,14 @@ public class plugin_DSmeasures implements Command
 	@Parameter(label = "Verbose log:")
 	boolean doVerboseLogging = false;
 
+	@Parameter(label = "Per cell reporting:", choices = {
+			"None",
+			"To console, grouped by video, timepoint then cell_id",
+			"To console, grouped by video, cell_id then timepoint",
+			"To console with separating empty lines, grouped by video, cell_id then timepoint"
+	})
+	String doPerCellReporting = "None";
+
 	@Parameter(visibility = ItemVisibility.MESSAGE, persist = false, required = false)
 	private final String pathFooterA
 		= "Note that folders has to comply with certain data format, please see";
@@ -402,7 +410,25 @@ public class plugin_DSmeasures implements Command
 			}
 		}
 
-		//do not report anything explicitly (unless special format for parsing is
-		//desired) as ItemIO.OUTPUT will make it output automatically
+		if (doPerCellReporting.startsWith("None")) return;
+		if (doPerCellReporting.contains("timepoint then cell"))
+		{
+			System.out.println(ImgQualityDataCache.MeasuresTableRow.printHeader());
+			for (ImgQualityDataCache.MeasuresTableRow row : cache.getMeasuresTable())
+				System.out.println(row);
+			return;
+		}
+		//
+		//else: cell_id then timepoint
+		int curId = -1;
+		final boolean doSeparating = doPerCellReporting.contains("separating");
+		System.out.println(ImgQualityDataCache.MeasuresTableRow.printHeader());
+		for (ImgQualityDataCache.MeasuresTableRow row : cache.getMeasuresTable_GroupedByCellsThenByVideos()) {
+			if (doSeparating && row.cellTraId != curId) {
+				if (curId != -1) System.out.println(); //print empty line before the listing of another cell
+				curId = row.cellTraId;
+			}
+			System.out.println(row);
+		}
 	}
 }
