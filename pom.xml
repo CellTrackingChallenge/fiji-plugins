@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.scijava</groupId>
 		<artifactId>pom-scijava</artifactId>
-		<version>33.2.0</version>
+		<version>37.0.0</version>
 	</parent>
 
 	<groupId>net.celltrackingchallenge</groupId>
@@ -112,8 +112,8 @@
 					<target>
 						<!-- make sure no COMMITrev tag files are floating around from some previous runs -->
 						<!-- NB: this task is redundant whenever 'mvn clean' is executed... -->
-						<delete><fileset dir="${project.build.outputDirectory}" includes="COMMITrev_*"/></delete>
-						<touch file="${project.build.outputDirectory}/COMMITrev_${git.commit.id.abbrev}_${project.artifactId}"/>
+						<delete><fileset dir="${project.build.outputDirectory}" includes="COMMITrev_*" /></delete>
+						<touch file="${project.build.outputDirectory}/COMMITrev_${git.commit.id.abbrev}_${project.artifactId}" />
 					</target>
 				</configuration>
 			</plugin>
@@ -127,10 +127,10 @@
 	<properties>
 		<package-name>net.celltrackingchallenge.fiji.plugins</package-name>
 
-		<license.licenseName>BSD 2-Clause</license.licenseName>
+		<license.licenseName>bsd_2</license.licenseName>
 		<license.projectName>CTC-Fiji-plugins</license.projectName>
 		<license.organizationName>Cell Tracking Challenge</license.organizationName>
-		<license.copyrightOwners>xulman</license.copyrightOwners>
+		<license.copyrightOwners>Vladimír Ulman</license.copyrightOwners>
 	</properties>
 
 	<repositories>
@@ -138,17 +138,13 @@
 			<id>scijava.public</id>
 			<url>https://maven.scijava.org/content/groups/public</url>
 		</repository>
-		<repository>
-			<id>it4i</id>
-			<url>https://artifactory.cs.vsb.cz/it4i/</url>
-		</repository>
 	</repositories>
 
 	<dependencies>
 		<dependency>
 			<groupId>net.celltrackingchallenge</groupId>
 			<artifactId>CTC-measures</artifactId>
-			<version>1.0.1</version>
+			<version>1.0.2</version>
 		</dependency>
 
 		<dependency>

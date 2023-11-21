@@ -28,7 +28,6 @@
 package net.celltrackingchallenge.fiji.plugins;
 
 import net.celltrackingchallenge.measures.util.BgMaskCreator;
-import net.celltrackingchallenge.measures.util.SimpleConsoleLogger;
 import org.scijava.ItemVisibility;
 import org.scijava.command.Command;
 import org.scijava.plugin.Parameter;
@@ -113,8 +112,8 @@ public class plugin_CreateBGMask implements Command
 				.setupForCTC(Paths.get(annPath.getAbsolutePath()),noOfDigits,widthOfPostprocessingErosion)
 				.forTheseTimepointsOnly(NumberSequenceHandler.toSet(fileIdxStr))
 				.setSciJavaLogger(log);
-		if (doOneMask) b.findMaskValidForAllTimepoints();
-		else b.createIndividualMaskForEachTimepoint();
+		if (doOneMask) b.setupToFindOneMaskValidForAllTimepoints();
+		else b.setupToCreateIndividualMaskForEachTimepoint();
 
 		try {
 			b.build().run();
