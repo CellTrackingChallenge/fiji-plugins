@@ -105,13 +105,13 @@ public class plugin_BIOmeasures implements Command
 	//citation footer...
 	@Parameter(visibility = ItemVisibility.MESSAGE, persist = false, required = false, label = "Please, cite us:")
 	private final String citationFooterA
-		= "Ulman V, Maška M, Magnusson KEG, ..., Ortiz-de-Solórzano C.";
+		= "Maška M, Ulman V, Delgado-Rodriguez P, ..., Ortiz-de-Solórzano C.";
 	@Parameter(visibility = ItemVisibility.MESSAGE, persist = false, required = false, label = ":")
 	private final String citationFooterB
-		= "An objective comparison of cell-tracking algorithms.";
+		= "The Cell Tracking Challenge: 10 years of objective benchmarking";
 	@Parameter(visibility = ItemVisibility.MESSAGE, persist = false, required = false, label = ":")
 	private final String citationFooterC
-		= "Nature Methods. 2017. doi:10.1038/nmeth.4473";
+		= "Nature Methods. 2023. doi:10.1038/s41592-023-01879-y";
 
 
 	//hidden output values
