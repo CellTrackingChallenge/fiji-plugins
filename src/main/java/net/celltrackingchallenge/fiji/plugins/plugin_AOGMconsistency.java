@@ -59,7 +59,8 @@ public class plugin_AOGMconsistency implements Command
 
 	@Parameter(label = "Path to tracking data folder:",
 		style = FileWidget.DIRECTORY_STYLE,
-		description = "Path should contain result files directly, or TRA folder with the files.")
+		description = "Path should contain result files directly, or TRA folder with the files.",
+		persistKey = "ctc_sequence_folder")
 	private File resPath;
 
 	@Parameter(label = "Path contains GT or result data:",

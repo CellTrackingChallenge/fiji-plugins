@@ -71,7 +71,8 @@ public class plugin_DSmeasures implements Command
 
 	@Parameter(label = "Path to images folder:",
 		style = FileWidget.DIRECTORY_STYLE,
-		description = "Path should contain cell image files directly: t???.tif")
+		description = "Path should contain cell image files directly: t???.tif",
+		persistKey = "ctc_rawimages_folder")
 	private File imgPath;
 
 	@Parameter(label = "Number of digits used in the image filenames:", min = "1",
@@ -97,7 +98,8 @@ public class plugin_DSmeasures implements Command
 		style = FileWidget.DIRECTORY_STYLE,
 		description = "Path should contain folders BG and TRA and annotation files: "
 			+ "BG/mask???.tif, TRA/man_track???.tif and man_track.txt. "
-			+ "The TRA/man_track???.tif must provide realistic masks of cells (not just blobs representing centres etc.).")
+			+ "The TRA/man_track???.tif must provide realistic masks of cells (not just blobs representing centres etc.).",
+		persistKey = "ctc_sequence_folder")
 	private File annPath;
 
 	@Parameter(label = "Verbose log:")

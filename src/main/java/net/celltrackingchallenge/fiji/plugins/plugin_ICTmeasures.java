@@ -57,12 +57,14 @@ public class plugin_ICTmeasures implements Command
 
 	@Parameter(label = "Path to computed result folder:",
 		style = FileWidget.DIRECTORY_STYLE,
-		description = "Path should contain result files directly: mask???.tif and res_track.txt")
+		description = "Path should contain result files directly: mask???.tif and res_track.txt",
+		persistKey = "ctc_res_folder")
 	private File resPath;
 
 	@Parameter(label = "Path to ground-truth folder:",
 		style = FileWidget.DIRECTORY_STYLE,
-		description = "Path should contain folders SEG, TRA and files: SEG/man_seg*.tif, TRA/man_track???.tif and TRA/man_track.txt")
+		description = "Path should contain folders SEG, TRA and files: SEG/man_seg*.tif, TRA/man_track???.tif and TRA/man_track.txt",
+		persistKey = "ctc_gt_folder")
 	private File gtPath;
 
 	@Parameter(label = "Number of digits used in the image filenames:", min = "1",
