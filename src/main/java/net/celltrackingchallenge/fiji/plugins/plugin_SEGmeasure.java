@@ -56,12 +56,14 @@ public class plugin_SEGmeasure implements Command
 
 	@Parameter(label = "Path to computed result folder:",
 		style = FileWidget.DIRECTORY_STYLE,
-		description = "Path should contain result files directly: mask???.tif")
+		description = "Path should contain result files directly: mask???.tif",
+		persistKey = "ctc_res_folder")
 	private File resPath;
 
 	@Parameter(label = "Path to ground-truth folder:",
 		style = FileWidget.DIRECTORY_STYLE,
-		description = "Path should contain folder SEG and files: SEG/man_seg*.tif")
+		description = "Path should contain folder SEG and files: SEG/man_seg*.tif",
+		persistKey = "ctc_gt_folder")
 	private File gtPath;
 
 	@Parameter(label = "Number of digits used in the image filenames:", min = "1",

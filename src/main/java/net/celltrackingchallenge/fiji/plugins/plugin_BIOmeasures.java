@@ -58,12 +58,14 @@ public class plugin_BIOmeasures implements Command
 
 	@Parameter(label = "Path to computed result folder:",
 		style = FileWidget.DIRECTORY_STYLE,
-		description = "Path should contain result files directly: mask???.tif and res_track.txt")
+		description = "Path should contain result files directly: mask???.tif and res_track.txt",
+		persistKey = "ctc_res_folder")
 	private File resPath;
 
 	@Parameter(label = "Path to ground-truth folder:",
 		style = FileWidget.DIRECTORY_STYLE,
-		description = "Path should contain folder TRA and files: TRA/man_track???.tif and TRA/man_track.txt")
+		description = "Path should contain folder TRA and files: TRA/man_track???.tif and TRA/man_track.txt",
+		persistKey = "ctc_gt_folder")
 	private File gtPath;
 
 	@Parameter(label = "Number of digits used in the image filenames:", min = "1",
@@ -114,6 +116,16 @@ public class plugin_BIOmeasures implements Command
 	private final String citationFooterC
 		= "Nature Methods. 2023. doi:10.1038/s41592-023-01879-y";
 
+	@Parameter(visibility = ItemVisibility.MESSAGE, persist = false, required = false)
+	private final String experimentalSectionLineSeparator = "----------------------------";
+	@Parameter(visibility = ItemVisibility.MESSAGE, persist = false, required = false)
+	private final String experimentalSectionLineOne = "The following flag was requested, but is experimental (code may break).";
+	@Parameter(visibility = ItemVisibility.MESSAGE, persist = false, required = false)
+	private final String experimentalSectionLineTwo = "The official measures do not accept empty images (checkbox ticked).";
+	@Parameter(label = "Report (and stop) on empty images",
+			description = "The calculation stops whenever an empty (only pixels with zero value) image is found either among the result or ground-truth images.")
+	private boolean optionStopOnEmptyImages = true;
+
 
 	//hidden output values
 	@Parameter(type = ItemIO.OUTPUT)
@@ -140,6 +152,12 @@ public class plugin_BIOmeasures implements Command
 	@Override
 	public void run()
 	{
+		if (!optionStopOnEmptyImages) {
+			log.warn("The checkbox \"Stop and complain on empty images\" is turned off.");
+			log.warn("You are running NOT the official, published variant of the measure(s).");
+			log.warn("If there's at least one empty image, the obtained values can differ.");
+		}
+
 		//saves the input paths for the final report table
 		GTdir  = gtPath.getPath();
 		RESdir = resPath.getPath();
@@ -148,6 +166,7 @@ public class plugin_BIOmeasures implements Command
 		//pre-fetching of data and some common pre-calculation
 		TrackDataCache cache = new TrackDataCache(log);
 		cache.noOfDigits = noOfDigits;
+		cache.shouldComplainOnEmptyImages = optionStopOnEmptyImages;
 
 		if (calcCT )
 		{

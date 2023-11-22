@@ -56,7 +56,8 @@ public class plugin_CreateBGMask implements Command
 		style = FileWidget.DIRECTORY_STYLE,
 		description = "Path must contain folder TRA and annotation TRA/man_track???.tif files. "
 			+ "Path may contain BG folder. Files BG/mask???.tif will be created at the path. "
-			+ "The TRA/man_track???.tif must provide realistic masks of cells (not just blobs representing centres etc.).")
+			+ "The TRA/man_track???.tif must provide realistic masks of cells (not just blobs representing centres etc.).",
+		persistKey = "ctc_sequence_folder")
 	private File annPath;
 
 	@Parameter(label = "Number of digits used in the image filenames:", min = "1",

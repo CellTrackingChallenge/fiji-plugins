@@ -54,12 +54,14 @@ public class plugin_TRAmeasure implements Command
 
 	@Parameter(label = "Path to computed result folder:",
 		style = FileWidget.DIRECTORY_STYLE,
-		description = "Path should contain result files directly: mask???.tif and res_track.txt")
+		description = "Path should contain result files directly: mask???.tif and res_track.txt",
+		persistKey = "ctc_res_folder")
 	private File resPath;
 
 	@Parameter(label = "Path to ground-truth folder:",
 		style = FileWidget.DIRECTORY_STYLE,
-		description = "Path should contain folder TRA and files: TRA/man_track???.tif and TRA/man_track.txt")
+		description = "Path should contain folder TRA and files: TRA/man_track???.tif and TRA/man_track.txt",
+		persistKey = "ctc_gt_folder")
 	private File gtPath;
 
 	@Parameter(label = "Number of digits used in the image filenames:", min = "1",
@@ -89,6 +91,12 @@ public class plugin_TRAmeasure implements Command
 	@Parameter(label = "Verbose report on matching of segments:",
 		description = "Logs which RES/GT segment maps onto which GT/RES in the data.")
 	private boolean doMatchingReports = false;
+
+	@Parameter(visibility = ItemVisibility.MESSAGE, persist = false, required = false)
+	private final String experimentalSectionNote = "Note that the official measures do not accept empty images (checkbox ticked).";
+	@Parameter(label = "Report (and stop) on empty images",
+			description = "The calculation stops whenever an empty (only pixels with zero value) image is found either among the ground-truth or result images.")
+	private boolean optionStopOnEmptyImages = false;
 
 
 
@@ -120,6 +128,14 @@ public class plugin_TRAmeasure implements Command
 	@Override
 	public void run()
 	{
+		/* ... not now... was already noted in the GUI
+		if (!optionStopOnEmptyImages) {
+			log.warn("The checkbox \"Stop and complain on empty images\" is turned off.");
+			log.warn("You are running NOT the official, published variant of the measure(s).");
+			log.warn("If there's at least one empty image, the obtained values can differ.");
+		}
+		*/
+
 		//saves the input paths for the final report table
 		GTdir  = gtPath.getPath();
 		RESdir = resPath.getPath();
@@ -130,6 +146,7 @@ public class plugin_TRAmeasure implements Command
 			tra.doLogReports       = doLogReports;
 			tra.doMatchingReports  = doMatchingReports;
 			tra.noOfDigits         = noOfDigits;
+			tra.doStopOnEmptyImages = optionStopOnEmptyImages;
 
 			TRA = tra.calculate(GTdir, RESdir);
 		}
