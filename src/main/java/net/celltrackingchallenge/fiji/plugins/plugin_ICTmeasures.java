@@ -106,6 +106,9 @@ public class plugin_ICTmeasures implements Command
 		description = "Checks multiple consistency-oriented criteria on both input and GT data before measuring TRA.")
 	private boolean optionConsistency = true;
 
+	@Parameter(visibility = ItemVisibility.MESSAGE, persist = false, required = false)
+	private final String moreOptionsNote = "Note that the Segmentation and Tracking Fiji menus offer these measures with more options.";
+
 
 	//citation footer...
 	@Parameter(visibility = ItemVisibility.MESSAGE, persist = false, required = false, label = "Please, cite us:")
