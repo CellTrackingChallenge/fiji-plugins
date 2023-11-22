@@ -93,6 +93,12 @@ public class plugin_DETmeasure implements Command
 		description = "Logs which RES/GT segment maps onto which GT/RES in the data.")
 	private boolean doMatchingReports = false;
 
+	@Parameter(visibility = ItemVisibility.MESSAGE, persist = false, required = false)
+	private final String experimentalSectionNote = "Note that the official measures do not accept empty images (checkbox ticked).";
+	@Parameter(label = "Report (and stop) on empty images",
+			description = "The calculation stops whenever an empty (only pixels with zero value) image is found either among the ground-truth or result images.")
+	private boolean optionStopOnEmptyImages = false;
+
 
 
 	//citation footer...
@@ -131,6 +137,14 @@ public class plugin_DETmeasure implements Command
 	@Override
 	public void run()
 	{
+		/* ... not now... was already noted in the GUI
+		if (!optionStopOnEmptyImages) {
+			log.warn("The checkbox \"Stop and complain on empty images\" is turned off.");
+			log.warn("You are running NOT the official, published variant of the measure(s).");
+			log.warn("If there's at least one empty image, the obtained values can differ.");
+		}
+		*/
+
 		//saves the input paths for the final report table
 		GTdir  = gtPath.getPath();
 		RESdir = resPath.getPath();
@@ -140,6 +154,7 @@ public class plugin_DETmeasure implements Command
 			det.doLogReports      = doLogReports;
 			det.doMatchingReports = doMatchingReports;
 			det.noOfDigits        = noOfDigits;
+			det.doStopOnEmptyImages = optionStopOnEmptyImages;
 
 			Set<Integer> timePoints = NumberSequenceHandler.toSet(fileIdxStr);
 			if (timePoints.size() > 0)
