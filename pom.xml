@@ -9,7 +9,7 @@
 
 	<groupId>net.celltrackingchallenge</groupId>
 	<artifactId>CTC-Fiji-plugins</artifactId>
-	<version>0.1.7-SNAPSHOT</version>
+	<version>0.1.7</version>
 
 	<organization>
 		<name>The Cell Tracking Challenge</name>
@@ -62,7 +62,7 @@
 	<!-- ====================================== -->
 
 	<scm>
-		<tag>HEAD</tag>
+		<tag>CTC-Fiji-plugins-0.1.7</tag>
 		<url>https://github.com/CellTrackingChallenge/fiji-plugins</url>
 	</scm>
 	<issueManagement>
